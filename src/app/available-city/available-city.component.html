@@ -1,0 +1,52 @@
+<div class="login-box">
+  <div class="logo">
+      <a href="javascript:void(0);">Admin<b> FoodApp</b></a>
+      <small>Admin FoodApp Available Cities</small>
+  </div><br/>
+  <div class="col-sm-12"></div>
+  <div class="card">
+      <div class="body">
+          <form [formGroup]="cityForm" (ngSubmit)="onSubmit()">
+              <div class="msg"></div>
+              <div class="input-group">
+                  <span class="input-group-addon">
+                      <i class="material-icons">map</i>
+                  </span>
+                  <div class="form-line">
+                    <label>Select Country</label>
+                </div>
+                  <div class="col-sm-12 notranslate">
+                    <select formControlName='countryId' (change) = "getCity($event.target.value)" class="form-control show-tick">
+                            <option value="">-- Please Select Country --</option>
+                            <option *ngFor="let country of countryData" value="{{ country.id }}">{{ country.countryName }}</option>
+                    </select>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">room</i>
+                </span>
+                <div class="form-line">
+                    <label>Select City</label>
+                </div>
+                <div class="col-sm-12"></div>
+                <select formControlName='cityId' class="form-control show-tick">
+                  <option value="">-- Please Select City --</option>
+                  <option *ngFor="let city of cityData" value="{{ city.id }}">{{ city.itemName }}</option>
+          </select>
+            </div>
+              <div class="row">
+                  <div class="col-xs-8 p-t-5">
+                  </div>
+                  <div class="col-xs-2">
+                      <button [routerLink]="['/dashboard']" routerLinkActive="router-link-active"  class="btn btn-block bg-blue waves-effect" type="submit">Skip</button>
+                  </div>
+                  <div class="col-xs-2">
+                      <button class="btn btn-block bg-pink waves-effect" type="submit">Submit</button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<section class="content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <h2>Delivery Boy Details
+              <!-- <a routerLink="/deliveryBoyList" class="btn btn-warning m-t-15 waves-effect pull-right" role="tab" data-toggle="tab">Back</a> -->
+          </h2>
+          
+      </div>
+      <div class="row clearfix">
+          <div class="col-xs-12 col-sm-3">
+              <div class="card profile-card">
+                  <div class="profile-header">&nbsp;</div>
+                  <div class="profile-body">
+                      <div class="image-area">
+                          <img src="assets/images/delivery-man.png" style="width:128px;height:128px;" alt="AdminBSB - Profile Image" />
+                      </div>
+                      <div class="content-area notranslate">
+                          <h3>{{ userName }}</h3>
+                          <p><a href="mailto:{{ email }}">{{ email }}</a></p>
+                          <p>{{ phoneNumber }}</p>
+                          <p *ngIf="status === 1; else inactive">Online</p>
+                          <ng-template #inactive><p>Offline</p></ng-template>
+                          <p><strong>Total Earnings</strong> &nbsp; :  {{totalAmount}} </p>
+                          <p style="color: #333"><strong>Balance</strong> &nbsp; :  {{balanceAmount}} </p>
+                          <a *ngIf = "isBlocked == 1; else unsus"><button class="btn btn-primary m-t-15 waves-effect" (click) = "unsuspend(isBlocked)">Enable</button></a>	
+                          <ng-template #unsus><button class="btn btn-danger m-t-15 waves-effect" (click) = "suspend(isBlocked)">Disable</button></ng-template>
+                      </div>
+                  </div>
+                  <div class="profile-footer">
+                      <ul>
+                          <li>
+                              <span>Trip Status</span>
+                              <span *ngIf="tripStatus === 1; else noTrip">In Trip</span>
+                              <ng-template #noTrip>
+                                <span>Not In Trip</span>
+                              </ng-template>
+                          </li>
+                          
+                          <li id="1" role="presentation" style="padding: 11px 29px;"><a href="#change_password_settings"  (click) = "getMap()" aria-controls="settings" class="btn btn-primary m-t-15 waves-effect" role="tab" data-toggle="tab">View Location In Map</a></li>
+
+                          
+                      </ul>
+                      <!-- <button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button> -->
+                  </div>
+              </div>
+
+
+          </div>
+          <div class="col-xs-12 col-sm-9">
+              <div class="card">
+                  <div class="body">
+                      <div>
+                          <ul class="nav nav-tabs" role="tablist">
+                              <li role="presentation" id="2" class="active"><a href="#profile_settings" (click)="getOrder()" aria-controls="settings"  role="tab" data-toggle="tab">Orders</a></li>
+                              <li role="presentation" id="3"><a href="#home" aria-controls="home" (click)="getDocument()" role="tab"  data-toggle="tab">Documents</a></li>
+                          </ul>
+
+                          <div class="tab-content">
+                              <div role="tabpanel" class="tab-pane fade in" id="home">
+                                  <div *ngFor="let document of documents" class="panel panel-default panel-post">
+                                    <div class="panel-heading">
+                                          <div class="media">
+                                              <div class="media-left">
+                                                  <img src="assets/images/office-material (1).png" />
+                                              </div>
+                                              <div class="media-body">
+                                                  <h4 class="media-heading notranslate">
+                                                      {{ document.label }}
+                                                  </h4>
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="panel-body notranslate">
+                                          <div class="post">
+                                            {{ document.value }}
+                                              <!-- <address>
+                                                <b>House / Flat No: </b> {{ document.value }}<br/>
+                                                <b>Address: </b>{{ document.location }}<br/>
+                                                <b>Landmark: </b>{{ document.landMark }}
+                                              </address> -->
+                                          </div>
+                                      </div>
+
+                                  </div>
+                                  <div *ngIf="userAddress?.length === 0">
+                                      <div class="panel-heading">
+                                          <div class="media center">
+                                              <div class="media-body">
+                                                  <h4 class="media-heading notranslate" style="text-align: center;">
+                                                      {{ noAddress }}
+                                                  </h4>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                              </div>
+                              <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
+                                  <div class="table-responsive" >
+                                      <table id="datatables" class="table table-striped table-no-bordered table-hover notranslate">
+                                        <thead>
+                                        <tr>
+                                          <th>S.No</th>
+                                          <th>Ref Id</th>
+                                          <th>Outlet</th>
+                                          <!-- <th>Delivery Address</th> -->
+                                          <th>Date</th>
+                                          <th>Total</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr *ngFor="let order of orderData; let i = index">
+                                          <th scope="row">{{ 10 *( page-1 ) + i + 1 }}</th>
+                                          <td>{{ order.orderReferenceId }}</td>
+                                          <td>{{ order.name }}</td>
+                                          <!-- <td>{{ order.deliveryAddress }}</td> -->
+                                          <td>{{ order.updated_at }}</td>
+                                          <td>{{ order.netAmount }}</td>
+                                          <td>{{ order.orderStatus }}</td>
+                                          <td>
+                                            <a routerLink="/orderView/{{ order.orderId }}" class="btn btn-primary m-t-15 waves-effect">View</a>
+                                          </td>
+                                        </tr>
+
+                                        <tr *ngIf="orderData?.length === 0">
+                                          {{ noOrder }}
+                                        </tr>
+                                        </tbody>
+
+                                      </table>
+                                    </div>
+                                    <!-- <ngb-pagination [collectionSize]="pages" (pageChange)="getUserOrder($event)" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
+                              </div>
+                              <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                  <agm-map class="gmap" [latitude]="lattitude"
+                                  [longitude]="longitude" [usePanning]="false" [zoomControl]="true"
+                                        [(zoom)]="location.zoom" (mapReady)="getDeliveryBoy()">
+                                        <agm-marker [agmFitBounds]="true" [(latitude)]="location.marker.lat"
+                                            [(longitude)]="location.marker.lng"
+                                            [markerDraggable]="location.marker.draggable"
+                                            ></agm-marker>
+                                    </agm-map>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

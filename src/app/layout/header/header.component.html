@@ -1,0 +1,51 @@
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+<!-- #END# Overlay For Sidebars -->
+<!-- Top Bar -->
+<nav class="navbar fixed">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" routerLink="/">SWIFT APP ADMIN</a>
+            <!-- <div id="google_translate_element"></div>
+            <link href="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"> -->
+            <!-- <ngx-lang translations="en,fr"></ngx-lang> -->
+           
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <div class="right header-title col s2 m2" id="google_translate_element" class="custom_language top_language" >
+                </div>
+                <!-- <li>
+                    <a _ngcontent-c4="" routerlink="/userList" ng-reflect-router-link="/userList" href="/userList" class=" waves-effect waves-block" title="Logout"><i _ngcontent-c4="" class="material-icons">exit_to_app</i></a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en' },
+            'google_translate_element'
+        );
+        /*
+        To remove the "powered by google",
+        uncomment one of the following code blocks.
+        NB: This breaks Google's Attribution Requirements:
+        https://developers.google.com/translate/v2/attribution#attribution-and-logos
+    */
+
+        // Native (but only works in browsers that support query selector)
+        if (typeof(document.querySelector) == 'function') {
+            document.querySelector('.goog-logo-link').setAttribute('style', 'display: none');
+            document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
+        }
+
+        // If you have jQuery - works cross-browser - uncomment this
+        jQuery('.goog-logo-link').css('display', 'none');
+        jQuery('.goog-te-gadget').css('font-size', '0');
+    }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- #Top Bar -->

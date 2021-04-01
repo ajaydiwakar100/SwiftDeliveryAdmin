@@ -1,0 +1,7 @@
+.ng-star-inserted[mattooltip*="Delete row"] { 
+    display: none !important;
+  }
+
+  .material-icons[_ngcontent-c6]{
+      display: none !important;
+  }

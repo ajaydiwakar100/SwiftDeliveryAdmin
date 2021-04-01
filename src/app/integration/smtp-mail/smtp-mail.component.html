@@ -1,0 +1,64 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+
+        <!-- Card -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                      <h2>
+                        Mail SMTP Details
+                        <div class="pull-right">
+                          <div class="pull-right">
+                            <button type="submit" form="mailForm" class="btn btn-success m-t-1 waves-effect">Save</button>
+                            &nbsp;
+                            <a routerLink="/integrations" class="btn btn-danger m-t-1 waves-effect">Cancel</a>
+                        </div>
+                        </div>
+                      </h2>
+                    </div>
+
+                    <div class="body">
+
+                      <form [formGroup]="mailForm" (ngSubmit)="onSubmit()" id="mailForm">
+                        <label for="hostname">SMTP Host Name</label>
+                        <div class="form-group">
+                            <div class="form-line notranslate">
+                                <input type="text" formControlName="hostName" id="hostname" class="form-control" placeholder="Enter SMTP Host Name">
+                            </div>
+                        </div>
+
+                        <label for="userName">SMTP Username</label>
+                        <div class="form-group">
+                            <div class="form-line notranslate">
+                                <input type="text" formControlName="userName" id="userName" class="form-control" placeholder="Enter SMTP User Name">
+                            </div>
+                        </div>
+
+                        <label for="password">SMTP Password</label>
+                        <div class="form-group">
+                            <div class="form-line notranslate">
+                                <input type="text" formControlName="password" id="password" class="form-control" placeholder="Enter SMTP Password">
+                            </div>
+                        </div>
+
+                        <label for="port">SMTP Port</label>
+                        <div class="form-group">
+                            <div class="form-line notranslate">
+                                <input type="text" formControlName="port" id="port" class="form-control" placeholder="Enter SMTP Port">
+                            </div>
+                        </div>
+
+                      </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Card -->
+    </div>
+  </section>

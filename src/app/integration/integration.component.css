@@ -1,0 +1,21 @@
+.header-icon {
+  border-radius: 6px;
+  background-color: #ec2e73eb;
+  padding: 15px;
+  margin-top: -18px;
+  margin-right: 12px;
+  float: left;
+  margin-left: 19px;
+}
+
+.icon-color{
+  color: #fff;
+}
+
+.card .body {
+  font-size: 14px;
+  color: #555;
+  padding: 20px;
+  height: 83px;
+
+ }

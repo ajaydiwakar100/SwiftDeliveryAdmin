@@ -1,0 +1,31 @@
+ngb-modal-window.modal.fade.show.d-block {
+    opacity: 1;
+}
+
+.form-group .form-control {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding-left: 0;
+    /* border-bottom-color: #3a4e5f; */
+    /* border-color: #21a0a0; */
+    border-bottom: groove;
+}
+.one {
+    color: #fff !important;
+text-transform: uppercase;
+text-decoration: none;
+background: rgb(13, 112, 204);
+padding: 7px;
+border-radius: 5px;
+
+display: inline-block;
+border: none;
+transition: all 0.4s ease 0s;
+  }
+
+.active1{
+    background-color: #666;
+    color: white;
+  }

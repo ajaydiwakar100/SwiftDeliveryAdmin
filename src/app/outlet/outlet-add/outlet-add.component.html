@@ -1,0 +1,584 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+
+        <!-- Input -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2> {{ formName }}
+                            <div class="pull-right">
+                                <button type="submit" form="outletForm"
+                                    class="btn btn-success m-t-1 waves-effect">Save</button>
+                                &nbsp;
+                                <a routerLink="/outletList" class="btn btn-danger m-t-1 waves-effect">Cancel</a>
+                            </div>
+
+
+                        </h2>
+                    </div>
+
+                    <div class="body">
+
+
+                        <form [formGroup]="outletForm" (ngSubmit)="onSubmit()" id="outletForm"
+                            enctype="multipart/form-data">
+
+                            <h2 class="card-inside-title"></h2>
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label"
+                                    *ngIf="hideRestaurant === false">
+                                    <label for="restaurantType">Restaurant Choose</label>
+                                </div>
+
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate" *ngIf="hideRestaurant === false">
+                                    <div class="form-group">
+                                        <input type="radio" id="radio_1"
+                                            (change)="changeRestaurant($event.target.value)"
+                                            formControlName="isRestaurant" value=0
+                                            [checked]="restaurantEnabled === true" />
+                                        <label for="radio_1">Existing Restaurant</label>
+                                        &nbsp;
+                                        <input type="radio" id="radio_2"
+                                            (change)="changeRestaurant($event.target.value)"
+                                            formControlName="isRestaurant" value=1
+                                            [checked]="restaurantEnabled === false" />
+                                        <label for="radio_2">Create New</label>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="restaurantEnabled === true"
+                                    class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="restaurantType">Select Restaurant</label>
+                                </div>
+
+                                <div *ngIf="restaurantEnabled === true" class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <!-- (change)="changeres($event)" -->
+                                            <select  formControlName="restaurantId" class="form-control show-tick"  >
+                                                <option value="">-- Please Select Restaurant --</option>
+                                                <option *ngFor="let country of restaurants" value="{{ country.id }}">
+                                                    {{ country.restaurantName }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="outletName">Outlet Name</label>
+                                </div>
+
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate">
+                                    <div class="form-group">
+                                        <div class="form-line error">
+                                            <input type="text" formControlName="outletName" required=""
+                                                aria-required="true" aria-invalid="true" id="outletName"
+                                                class="form-control" placeholder="Enter Outlet Name">
+                                        </div>
+
+                                        <!-- validation -->
+
+                                        <div *ngIf="submitted && outletValidation.outletName.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.outletName.errors.required">
+                                                <label id="outletName-error" class="error" for="outletName">This field
+                                                    is required.</label>
+                                            </div>
+                                            <div *ngIf="outletValidation.outletName.errors.minlength">
+                                                <label id="outletName-error" class="error" for="outletName">Minimum
+                                                    length of 4.</label>
+                                            </div>
+                                        </div>
+                                        <!-- validation end -->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="outletEmail">Outlet E-Mail</label>
+                                </div>
+
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" formControlName="email" id="outletEmail"
+                                                class="form-control notranslate" placeholder="Enter Outlet E-Mail">
+                                        </div>
+                                        <!-- validation -->
+                                        <div *ngIf="submitted && outletValidation.email.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.email.errors.required">
+                                                <label id="name-error" class="error" for="name">This field is
+                                                    required.</label>
+                                            </div>
+                                            <div *ngIf="outletValidation.email.errors.email">
+                                                <label id="name-error" class="error" for="name">Enter a valid
+                                                    E-Mail.</label>
+                                            </div>
+                                        </div>
+                                        <!-- validation end -->
+                                    </div>
+                                </div>
+
+                                <div *ngIf="hideRestaurant === false"
+                                    class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="password">Password</label>
+                                </div>
+
+                                <div *ngIf="hideRestaurant === false" class="col-lg-10 col-md-10 col-sm-8 col-xs-7 ">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                                <div style="margin-left: 757px;"class="demo-google-material-icon notranslate"> <i class="material-icons notranslate" (click)="password1()">visibility</i> <span class="icon-name"></span> </div>
+                                            <input [type]="show ? 'text' : 'password'" id="password" value="{{ password }}"
+                                                formControlName="password" class="form-control"
+                                                placeholder="Enter Password" required=""
+                                                ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" >
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.password.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.password.errors.required">
+                                                <label id="password-error" class="error" for="password">This field
+                                                    is required.</label>
+                                            </div>
+                                            <div *ngIf="outletValidation.password.errors.minlength">
+                                                <label id="password-error" class="error" for="password">Minimum
+                                                    length of 6.</label>
+                                            </div>
+                                        </div>
+                                        <a (click)="generatePassword()"
+                                            class="btn btn-primary m-t-1 waves-effect pull-right">Auto Generate
+                                            Password</a>
+
+                                            <i class="fas fa-eye"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="commission">% of Commission </label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 ">
+                                    <div class="form-group">
+                                        <div class="form-line notranslate">
+                                            <input type="number" formControlName="commission" max="50" min="0"
+                                                id="commission" required aria-required="true" aria-invalid="true"
+                                                (keypress)="numberOnly($event)" 
+                                                class="form-control" placeholder="Enter Commission">
+                                        </div>
+
+                                        <!-- validation -->
+
+                                        <div *ngIf="submitted && outletValidation.commission.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.commission.errors.required">
+                                                <label id="name-error" class="error" for="name">This field
+                                                    is required.</label>
+                                            </div>
+                                            <div *ngIf="outletValidation.commission.errors.max">
+                                                <label id="name-error" class="error" for="name">commission should be
+                                                    less than 50</label>
+                                            </div>
+                                        </div>
+                                        <!-- validation end -->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="convenienceFee">Convenience Fee (optional)</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" formControlName="convenienceFee" id="convenienceFee"
+                                            (keypress)="numberOnly($event)" min="0"
+                                                class="form-control" placeholder="Enter Convenience Fee (Optional)">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="costForTwo">Cost For Two</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" formControlName="costForTwo" id="costForTwo"
+                                            (keypress)="numberOnly($event)"
+                                            min="0"
+                                                class="form-control" placeholder="Enter Cost For Two">
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="preparationTime">Preparation Time</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="number" formControlName="preparationTime" id="preparationTime"
+                                                class="form-control" min="0"
+                                                (keypress)="numberOnly($event)"
+                                                placeholder="Enter Preparation Time ( In Minutes )">
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.preparationTime.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.preparationTime.errors.required">
+                                                <label id="preparationTime-error" class="error" for="preparationTime">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="addressLineOne">Address Line 1</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 notranslate">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" formControlName="addressLineOne" id="addressLineOne"
+                                                class="form-control" placeholder="Enter Address">
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.addressLineOne.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.addressLineOne.errors.required">
+                                                <label id="addressLineOne-error" class="error" for="addressLineOne">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="addressLineTwo">Address Line 2</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 ">
+                                    <div class="form-group">
+                                        <div class="form-line notranslate">
+                                            <input type="text" formControlName="addressLineTwo" id="addressLineTwo"
+                                                class="form-control" placeholder="Enter Address">
+                                        </div>
+                                        <!-- validation -->
+
+                                        <div *ngIf="submitted && outletValidation.addressLineTwo.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.addressLineTwo.errors.required">
+                                                <label id="addressLineTwo-error" class="error"
+                                                    for="addressLineTwoaddressLineTwo">This field is required.</label>
+                                            </div>
+                                        </div>
+                                        <!-- validation end -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="area">Area</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="area" formControlName="area" class="form-control"
+                                                placeholder="Enter Area">
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.area.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.area.errors.required">
+                                                <label id="area-error" class="error" for="area">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="city">City</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="city" formControlName="city" class="form-control"
+                                                placeholder="Enter City">
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.city.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.city.errors.required">
+                                                <label id="city-error" class="error" for="city">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="street">Street</label>
+                                </div>
+                                
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="street" formControlName="street" class="form-control"
+                                                placeholder="Enter Street">
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.street.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.street.errors.required">
+                                                <label id="street-error" class="error" for="street">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                
+                                <div style="margin-left:50px;">
+                                    <div class="col-sm-2"><label>From Time</label></div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group date" id="bs_datepicker_component_container">
+                                            <div class="form-line">
+                                            <ngx-material-timepicker (timeSet)="timeChanged($event, 'frmTime')" #picker></ngx-material-timepicker>
+                                            <input [ngxTimepicker]="picker" [format]="24" 
+                                            formControlName="showFromTime" type="text"
+                                            class="form-control" placeholder="Please choose From Time..."
+                                                >
+
+                                            </div>
+                                            <div *ngIf="submitted && outletValidation.showFromTime.errors">
+                                                <label *ngIf="outletValidation.showFromTime.errors.required" class="error">From time is required</label>
+                                            </div>
+                                           <span class="input-group-addon">
+                                            <i class="material-icons">date_range</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"> <label>To Time</label></div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group date" id="bs_datepicker_component_container">
+                                            <div class="form-line">
+                                            <ngx-material-timepicker #pickerTo></ngx-material-timepicker>
+                                            <input [ngxTimepicker]="pickerTo" [format]="24"
+                                             formControlName="showToTime" type="text" [min]="minToTime"
+                                                class="form-control" placeholder="Please choose To Time...">
+                                            </div>
+                                            <div *ngIf="submitted && outletValidation.showToTime.errors" class="error">
+                                            <label *ngIf="outletValidation.showToTime.errors.required" class="error">To time is required</label>
+                                            </div>
+                                            <span class="input-group-addon">
+                                            <i class="material-icons">date_range</i>
+                                            </span>
+                                        </div>
+                                    </div>   
+                                </div>
+
+                                <div class="row" style="margin-left:30px;">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="holiday">Holidays</label>
+                                    </div>
+                                 
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line notranslate">
+                                                
+                                                <ng-multiselect-dropdown 
+                                                formcontrolname="holiday"
+                                                [(ngModel)]="selectedItems" [data]="holiday" [settings]="serviceSettings"
+                                                (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="onDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)"
+                                                 [ngModelOptions]="{standalone: true}">
+                                                </ng-multiselect-dropdown>
+                                            </div>
+                                            <div *ngIf="submitted && selectedItems.length == 0"><label class="error">Holiday is required</label></div>
+
+                                        </div>
+                                    </div>     
+                                </div>  
+
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label"
+                                style="margin-left:30px;">
+                                    <label for="street">Break Time in days</label>
+                                </div>
+                                
+                                <br>
+                                <br>
+                                <br>
+                                
+                             
+                                <div style="margin-left:50px;">
+                                    <div class="col-sm-2"><label>From Time</label></div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group date" id="bs_datepicker_component_container">
+                                            <div class="form-line">
+                                            <ngx-material-timepicker (timeSet)="timeChanged($event, 'frmBreakTime')" #frombreak></ngx-material-timepicker>
+                                            <input [ngxTimepicker]="frombreak"
+                                            [format]="24" formControlName="breakFromTime" type="text"
+                                            class="form-control" placeholder="Please choose To Time...">
+                                            </div>
+                                            <div *ngIf="submitted && outletValidation.breakFromTime.errors">
+                                            <label *ngIf="outletValidation.breakFromTime.errors.required" class="error">From time is required</label>
+                                            </div>
+                                            <span class="input-group-addon">
+                                            <i class="material-icons">date_range</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2"> <label>To Time</label></div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group date" id="bs_datepicker_component_container">
+                                            <div class="form-line">
+                                            <ngx-material-timepicker #tobreak></ngx-material-timepicker>
+                                            <input [ngxTimepicker]="tobreak"
+                                            [format]="24" formControlName="breakToTime" type="text" [min]="minToBreakTime"
+                                            class="form-control" placeholder="Please choose To Time...">
+                                            </div>
+                                            <div *ngIf="submitted && outletValidation.breakToTime.errors" class="error">
+                                            <label *ngIf="outletValidation.breakToTime.errors.required" class="error">To time is required</label>
+                                            </div>
+                                            <span class="input-group-addon">
+                                            <i class="material-icons">date_range</i>
+                                            </span>
+                                        </div>
+                                    </div>   
+                                </div>
+                                 
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" *ngIf="vegNonVegEnabled == 1">
+                                    <label for="isPureVeg">Type</label>
+                                </div>
+
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" *ngIf="vegNonVegEnabled == 1">
+                                    <div class="form-group">
+                                        <input formControlName="isPureVeg" type="radio" id="radio_3" value=1
+                                            [checked]="vegEnabled === true" />
+                                        <label for="radio_3">Veg</label>
+                                        &nbsp;
+                                        <input formControlName="isPureVeg" type="radio" id="radio_4" value=0
+                                            [checked]="vegDisabled === true" />
+                                        <label for="radio_4">Non-Veg</label>
+                                        &nbsp;
+                                        <input formControlName="isPureVeg" type="radio" id="radio_5" value=2
+                                            [checked]="vegAndNonvegDisabled === true" />
+                                        <label for="radio_5">both veg and Non-Veg</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="contactNumber">Contact Number</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="contactNumber" formControlName="contactNumber"
+                                                class="form-control" placeholder="Enter Contact Number">
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.contactNumber.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.contactNumber.errors.required">
+                                                <label id="contactNumber-error" class="error" for="contactNumber">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="status">Status</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group ">
+                                        <div class="form-line">
+                                            <input formControlName="status" type="radio" id="radio_6" value=1
+                                            [checked]="statusEnabled === true" />
+                                            <label for="radio_6">Enable</label>
+                                            &nbsp;
+                                            <input formControlName="status" type="radio" id="radio_7" value=0
+                                            [checked]="statusDisabled === true" />
+                                            <label for="radio_7">Disable</label>
+                                        </div>
+                                        <div *ngIf="submitted && outletValidation.status.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="outletValidation.status.errors.required">
+                                                <label id="status-error" class="error" for="status">This field
+                                                    is required.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="contactNumber">Restaurant Location</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line notranslate">
+                                            <input type="text" id="locationSearch" class="form-control"
+                                               #search (keyup)="mapSearch()" placeholder="Location Search">
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                    <agm-map [fitBounds]="true" class="gmap" [(latitude)]="location.lat" [(longitude)]="location.lng"
+                                        [(zoom)]="location.zoom"  [disableDefaultUI]="true" [zoomControl]="true">
+                                        <agm-marker [agmFitBounds]="true" [(latitude)]="location.marker.lat"
+                                            [(longitude)]="location.marker.lng"
+                                            [markerDraggable]="location.marker.draggable"
+                                            (dragEnd)='markerDragEnd($event)'></agm-marker>
+                                    </agm-map>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="latitude">Latitude</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" formControlName="latitude" value="{{ latitude }}"
+                                                id="latitude" class="form-control" placeholder="Enter Latitude">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="longitude">Longitude</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" formControlName="longitude" value="{{ longitude }}"
+                                                id="longitude" class="form-control" placeholder="Enter Longitude">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" *ngIf="isrestaurant == true"> -->
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+
+                                    <label for="outletImage">Outlet Image</label>
+                                </div>
+                                <!-- <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" *ngIf="isrestaurant == true"> -->
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="file" (change)="handleFileInput($event.target.files)"
+                                                class="form-control" formControlName="outletImage" id="outletImage"
+                                                #fileInput />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                                <!-- <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 center" *ngIf="isrestaurant == true"> -->
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 center">
+                                    <div class="">
+                                        <img [src]="url || 'assets/images/image_placeholder.jpg'" height="250"
+                                            width="400"> <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tab closed -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Input -->
+
+    </div>
+</section>

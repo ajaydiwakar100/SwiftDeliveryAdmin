@@ -1,0 +1,19 @@
+
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0;
+    border: none;
+    top: 0;
+    left: 0;
+    position: unset !important;
+    z-index: 12;
+    width: 100%;
+}
+
+.nav > li > a {
+    color: #3f4d67 !important;
+}
+
+.navbar-header {
+    padding: 10px 267px;
+}

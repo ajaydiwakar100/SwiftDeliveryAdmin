@@ -1,0 +1,150 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <h2></h2>
+    </div>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Copy Menu </h4>
+        
+        <button type="button" class="close" aria-label="Close"
+          (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <hr>
+      <div class="modal-body">
+       
+        <form [formGroup]="restaurantCopyForm">
+    <div class="form-group" >
+      <label>Copy Menu From  :</label><br>
+      <!-- <input
+      class="form-control"
+      [(ngModel)]="this.fromRest" 
+      [typeahead]="restaurantList"
+      [typeaheadScrollable]="true"
+       [typeaheadOptionsInScrollableView]="5"
+       [typeaheadMinLength]="0"
+       placeholder="select restaurant"
+       typeaheadOptionField="restaurantName"
+       placeholder="select restaurant" 
+       name="fromRest" 
+       > -->
+
+       <select  formControlName="fromRest" class="form-control show-tick"  >
+        <option value="">-- Please Select Restaurant --</option>
+        <option *ngFor="let country of restaurantList" value="{{ country.id }}">
+            {{ country.restaurantName }}</option>
+    </select>
+       <br>
+
+      <label>Copy Menu To  :</label><br>
+      <select  formControlName="toRest" class="form-control show-tick"  >
+        <option value="">-- Please Select Restaurant --</option>
+        <option *ngFor="let country of restaurantList" value="{{ country.id }}">
+            {{ country.restaurantName }}</option>
+    </select>
+      <!-- <input  class="form-control" 
+      [(ngModel)]="this.toRest" 
+      [typeahead]="restaurantList"
+      [typeaheadScrollable]="true"
+       [typeaheadOptionsInScrollableView]="5"
+       [typeaheadMinLength]="0"
+       typeaheadOptionField="restaurantName"
+      placeholder="select restaurant" 
+      name="toRest"
+       required> -->
+    </div>
+  </form>
+      </div>
+      <div class="modal-footer">
+        <!-- [disabled]="restaurantCopyForm.invalid" -->
+        <button type="button"
+         class="btn btn-outline-dark"
+          (click)="modal.close()">Confirm</button>
+      </div>
+    </ng-template>
+
+
+    <!-- Exportable Table -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Outlet List
+              <a routerLink="/outletAdd" [queryParams]="{ res: 'restaurant'}" class="btn btn-success m-t-1 waves-effect pull-right m-l-10">Add Outlet</a>
+              <button (click)="getRestaurantListModal(content)" class="btn btn-success m-t-1 waves-effect pull-right m-l-12">Copy Menu</button>
+            </h2>
+          </div>
+          <div class="md-form mt-0">
+            <input class="form-control" type="text" placeholder="Search" (input)="Search($event.target.value)" aria-label="Search">
+          </div>
+          <div class="body">
+            <div class="table-responsive user-table" >
+              <table id="datatables" class="table table-striped table-no-bordered table-hover notranslate">
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>E-Mail</th>
+                  <th>Cash Mode</th>
+                  <th>Rating</th>
+                  <!-- <th>Status</th> -->
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr *ngFor="let outlet of outletList; let i = index" current-page="currentPage">
+                  <th scope="row">{{ 10 *( page-1 ) + i + 1 }}</th>
+                  <td>
+
+                    <img src="{{ outlet.outletImage || 'assets/images/shop.png' }}" style="width:40px;height:45px;" >
+
+                  </td>
+                  <td style="width: 50px;">{{ outlet.outletName }}</td>
+                  <td>{{ outlet.contactNumber }}</td>
+                  <td>{{ outlet.email }}</td>
+                  <!-- <td *ngIf="outlet.status == 'true'; else disabled">Enabled</td> -->
+                  <!-- <td #disabled>Disabled</td> -->
+                  <td>
+                    <mat-slide-toggle  [checked]="outlet.cashmode | numtobool" (toggleChange)="onCashModeToggle(outlet.outletId, outlet.cashmode)"></mat-slide-toggle>
+                  </td>
+                  <td>
+                      <ngb-rating [(rate)]="outlet.averageRating" [max]=5 [readonly]=true>
+                          <ng-template let-fill="fill">
+                            <span class="star" [ngClass]="'color'+outlet.averageRating" [class.filled]="fill === 100">&#9733;</span>
+                          </ng-template>
+                        </ngb-rating>
+                  </td>
+                  <td>
+                      <a routerLink="/outletView/{{ outlet.outletId }}" class="btn btn-primary m-t-15 waves-effect">View</a>
+                      &nbsp;
+                    <a routerLink="/outletEdit/{{ outlet.outletId }}" class="btn btn-warning m-t-15 waves-effect">Edit</a>
+                    &nbsp;
+                    <a (click)="restaurantAdminLogin(outlet.outletId)" class="btn m-t-15 bg-pink waves-effect">Login</a>
+                    &nbsp;
+                      <a *ngIf ="outlet.isBlocked ==1"><button class="btn btn-danger m-t-15 waves-effect" type="button" disabled>Blocked</button></a>
+                  </td>
+                </tr>
+
+
+                </tbody>
+
+              </table>
+            </div>
+            <ngb-pagination *ngIf="status == 1" [collectionSize]="pages" (pageChange)="getOutlet($event)" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+            <ngb-pagination *ngIf="status == 2" [collectionSize]="search_pages" (pageChange)="searchOutlets($event)" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- #END# Exportable Table -->
+</section>

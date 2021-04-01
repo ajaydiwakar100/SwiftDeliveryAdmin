@@ -1,0 +1,51 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+
+          <strong>Error!</strong> {{ errorMessage }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Card -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                      <h2>
+                        Twilio
+                        <div class="pull-right">
+                          <div class="pull-right">
+                            <button type="submit" form="smsForm" class="btn btn-success m-t-1 waves-effect">Save</button>
+                            &nbsp;
+                            <a routerLink="/smsGateway" class="btn btn-danger m-t-1 waves-effect">Cancel</a>
+                        </div>
+                        </div>
+                      </h2>
+                    </div>
+
+                    <div class="body">
+
+                      <form [formGroup]="smsForm" (ngSubmit)="onSubmit()" id="smsForm">
+                        <label for="secretKey">Twilio Secret Key</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" formControlName="secretKey" id="secretKey" class="form-control" placeholder="Enter Secret Key">
+                            </div>
+                        </div>
+
+                      </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Card -->
+    </div>
+  </section>

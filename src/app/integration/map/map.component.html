@@ -1,0 +1,58 @@
+<section class="content">
+
+  <div class="container-fluid">
+      <div class="block-header">
+          <h2></h2>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+
+        <strong>Error!</strong> {{ errorMessage }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Card -->
+      <div class="row clearfix">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                  <div class="header">
+                    <h2>
+                      Map API Key
+                      <div class="pull-right">
+                        <div class="pull-right">
+                          <button type="submit" form="map" class="btn btn-success m-t-1 waves-effect" [disabled]="other" >Save</button>
+                          &nbsp;
+                          <a routerLink="/integrations" class="btn btn-danger m-t-1 waves-effect">Cancel</a>
+                      </div>
+                      </div>
+                    </h2>
+                  </div>
+
+                  <div class="body">
+
+                    <form [formGroup]="mapForm" (ngSubmit)="onSubmit()" id="map">
+                      <label for="android_api">Android API Key</label>
+                      <div class="form-group">
+                          <div class="form-line">
+                              <input type="text" formControlName="androidMapKey" id="android_api" class="form-control" placeholder="Enter Android API Key" [disabled]="other"  readonly>
+                          </div>
+                      </div>
+
+                      <label for="ios_api">iOS API Key</label>
+                      <div class="form-group">
+                          <div class="form-line">
+                              <input type="text" id="ios_api" class="form-control" formControlName="iosMapKey" placeholder="Enter iOS API Key" [disabled]="other"  readonly>
+                          </div>
+                      </div>
+
+                    </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- #END# Card -->
+  </div>
+</section>

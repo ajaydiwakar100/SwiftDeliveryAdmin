@@ -1,0 +1,43 @@
+<section class="content">
+
+    <div class="container-fluid">
+      <div class="block-header">
+        <h2> Order Mail Templates
+          <div class="pull-right">
+            <!-- <a routerLink="/orderAddMail" class="btn btn-primary m-t-1 waves-effect">New Template</a> -->
+            &nbsp;
+            <a routerLink="/mail" class="btn btn-danger m-t-1 waves-effect">Back</a>
+          </div>
+        </h2>
+      </div>
+  
+      <div class="col-sm-12"></div><br />
+      <!-- Card -->
+      <div class="row clearfix">
+        <div *ngFor="let orderMail of orderMailList" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="card">
+            <div class="header">
+              <h2>
+                {{ orderMail.templateName }}
+                <div class="pull-right">
+                  <label class="switch notranslate">
+                    <input type="radio" value="{{ orderMail.id }}"
+                      (change)="updateStatus('signup', 1, orderMail.id)" [checked]="orderMail.status === 1"
+                      name="active">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </h2>
+            </div>
+  
+            <div class="body">
+              <a routerLink="/orderEditMail/{{ orderMail.id }}" class="btn btn-primary m-t-1 waves-effect">View</a>
+  
+            </div>
+          </div>
+        </div>
+  
+      </div>
+      <!-- #END# Card -->
+    </div>
+  </section>

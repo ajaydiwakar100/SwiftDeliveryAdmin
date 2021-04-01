@@ -1,0 +1,153 @@
+<section>
+  <!-- Left Sidebar -->
+  <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+          <div class="image">
+              <img src="assets/images/swift.png" width="48" height="48" alt="User" />
+          </div>
+          <div class="info-container">
+              <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ userName }}</div>
+              <div class="email">{{ email }}</div>
+              <div class="btn-group user-helper-dropdown">
+                  <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                  <ul class="dropdown-menu pull-right">
+                      <li><a (click)="logout()"><i class="material-icons">input</i>Sign Out</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <!-- #User Info -->
+      <!-- Menu -->
+      <div class="menu scroll_view">
+          <ul class="list">
+              <li class="header"></li>
+              <li routerLinkActive="active">
+                  <a routerLink="/dashboard" >
+                      <i class="material-icons notranslate">dashboard</i>
+                      <span>Dashboard</span>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                  <a routerLink="/userList"  >
+                      <i class="material-icons notranslate">person</i>
+                      <span>Users</span>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                  <a routerLink="/deliveryBoyList">
+                      <i class="material-icons notranslate">directions_bike</i>
+                      <span>Delivery Boys</span>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/cuisinList">
+                    <i class="material-icons notranslate">room_service</i>
+                    <span>Cuisines</span>
+                </a>
+            </li>
+              <li routerLinkActive="active">
+                  <a routerLink="/restaurantList">
+                      <i class="material-icons notranslate">restaurant</i>
+                      <span>Restaurants</span>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/transaction">
+                    <i class="material-icons notranslate">account_balance_wallet</i>
+                    <span>Driver Payout</span>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/outtransaction">
+                    <i class="material-icons notranslate">account_balance_wallet</i>
+                    <span>Shop Payout</span>
+                </a>
+            </li>
+            <!-- <li routerLinkActive="active">
+                <a routerLink="/type">
+                    <i class="material-icons notranslate">list</i>
+                    <span>Type</span>
+                </a>
+            </li> -->
+              <li routerLinkActive="active">
+                <a routerLink="/outletList">
+                    <i class="material-icons notranslate">store</i>
+                    <span>Outlets</span>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/orderList">
+                    <i class="material-icons notranslate">directions_bike</i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <!-- <li routerLinkActive="active">
+                <a routerLink="/outtransaction">
+                    <i class="material-icons notranslate">account_balance_wallet</i>
+                    <span>Shop Payout</span>
+                </a>
+            </li> -->
+            <li routerLinkActive="active">
+                <a routerLink="/taxesList">
+                    <i class="material-icons">account_balance_wallet</i>
+                    <span>Taxes</span>
+                </a>
+            </li>
+              <li routerLinkActive="active">
+                  <a routerLink="/integrations">
+                      <i class="material-icons notranslate">settings_input_composite</i>
+                      <span>integrations</span>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/reports">
+                    <i class="material-icons notranslate">archive</i>
+                    <span>Reports</span>
+                </a>
+            </li>              
+              <li routerLinkActive="active">
+                <a routerLink="/setting">
+                    <i class="material-icons notranslate">settings</i>
+                    <span>Settings</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/mapDeliveryBoy">
+                    <i class="material-icons notranslate">map</i>
+                    <span>God’s eye</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/languageList">
+                    <i class="material-icons notranslate">language</i>
+                    <span>Language</span>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/localization">
+                    <i class="material-icons notranslate">format_size</i>
+                    <span>Localization</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                    <a routerLink="/mail">
+                        <i class="material-icons notranslate">mail</i>
+                        <span>Mail Template</span>
+                    </a>
+                  </li>
+              <li routerLinkActive="active">
+                <a routerLink="/bannerList">
+                    <i class="material-icons notranslate">photo_size_select_actual</i>
+                    <span>Banners</span>
+                </a>
+              </li>
+          </ul>
+      </div>
+      <!-- #Menu -->
+      <!-- Footer -->
+
+      <!-- #Footer -->
+  </aside>
+  <!-- #END# Left Sidebar -->
+</section>

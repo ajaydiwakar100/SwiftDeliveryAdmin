@@ -1,0 +1,143 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <h2></h2>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+        <div class="form-group">
+          <label>Slelct Language</label>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div class="form-group">
+          <div class="form-line notranslate">
+            <select (change)="changeLang($event.target.value)" class="form-control show-tick">
+              <option *ngFor="let language of languageList" value="{{ language.iso }}">
+                {{ language.lang }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Language Data</h2>
+          </div>
+          <div class="body notranslate">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableData" [searchable]="true"
+                (action)="action($event, '')" [pageSizeOptions]="[200]" [notification]="yourMessage" [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Between</h2>
+          </div>
+          <div class="body">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableDataBetween" [searchable]="true"
+                (action)="action($event, 'between')" [pageSizeOptions]="[200]" [notification]="yourMessage"
+                [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Minimum</h2>
+          </div>
+          <div class="body">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableDataMin" [searchable]="true"
+                (action)="action($event, 'min')" [pageSizeOptions]="[200]" [notification]="yourMessage" [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Maximum</h2>
+          </div>
+          <div class="body">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableDataMax" [searchable]="true"
+                (action)="action($event, 'max')" [pageSizeOptions]="[200]" [notification]="yourMessage" [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Size</h2>
+          </div>
+          <div class="body">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableDataSize" [searchable]="true"
+                (action)="action($event, 'size')" [pageSizeOptions]="[200]" [notification]="yourMessage"
+                [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Custom</h2>
+          </div>
+          <div class="body">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableDataCustom" [searchable]="true"
+                (action)="action($event, 'custom')" [pageSizeOptions]="[200]" [notification]="yourMessage"
+                [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Attributes</h2>
+          </div>
+          <div class="body">
+            <div *ngIf="dataLoaded">
+              <app-editable-table [columns]="['id','key', 'value', 'Actions']" [editableColumns]="['value']"
+                [dateColumns]="['createdAt','updatedAt']" [data]="tableDataAttributes" [searchable]="true"
+                (action)="action($event, 'attributes')" [pageSizeOptions]="[200]" [notification]="yourMessage"
+                [maxChar]="100">
+              </app-editable-table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>

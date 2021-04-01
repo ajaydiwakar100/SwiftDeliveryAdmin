@@ -1,0 +1,61 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+
+        <!-- Card -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                      <h2>
+                        Register Mail Template
+                        <div class="pull-right">
+                          <div class="pull-right">
+                            <button type="submit" form="templateForm" class="btn btn-success m-t-1 waves-effect">Save</button>
+                            &nbsp;
+                            <a routerLink="/registerMail" class="btn btn-danger m-t-1 waves-effect">Cancel</a>
+                        </div>
+                        </div>
+                      </h2>
+                    </div>
+
+                    <div class="body">
+
+                      <div class="row clearfix">
+
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+
+                      <form id="templateForm" [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+
+                          <label for="secretKey">Template Name</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                            <input type="text" class="form-control" formControlName="templateName">
+                          </div>
+                          </div>
+                        <label for="secretKey">Template</label>
+                        <div class="form-group">
+                            <ck-editor name="editor1" [config]="{extraPlugins: 'divarea'}" formControlName="template" skin="moono-lisa" language="en" [fullPage]="true" id="{{ templateId }}"></ck-editor>
+                        </div>
+
+                      </form>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tokens">
+                      <label>Available Tokens</label>
+                      <div *ngFor="let subCategory of mailToken?.split(',')">
+                        {{ subCategory }}
+                     </div>
+                    </div>
+                  </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Card -->
+    </div>
+  </section>

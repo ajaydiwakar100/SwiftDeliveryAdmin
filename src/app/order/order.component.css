@@ -1,0 +1,13 @@
+.dark {
+    background-color: #ad5820a1 !important;
+}
+.assign{
+    margin-left: 21px;
+}
+#myModal li{
+    line-height: 64px;
+    padding: 0px 27px;
+}
+#myModal .mat-raised-button{
+    margin-left: 44px;
+}

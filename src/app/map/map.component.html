@@ -1,0 +1,40 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <h2>Delivery Boys Location</h2>
+    </div>
+
+<agm-map #AgmMap class="gmap"
+  [latitude]="lat" 
+  [longitude]="lng"
+  [fitBounds]="true"
+  [zoom]="15"
+  [disableDefaultUI]="true"
+  [zoomControl]="true"
+  (mapClick)="mapClicked($event)">
+
+  <agm-marker 
+  [agmFitBounds]="true"
+    *ngFor="let m of markers; let i = index"
+    (markerClick)="clickedMarker(m.staffName, i)"
+    [latitude]="m.latitude"
+    [longitude]="m.longitude"
+    [label]="m.staffName"
+    [iconUrl]="'assets/images/pin.png'"
+    [markerDraggable]="false">
+
+    <agm-info-window
+      [isOpen]="isInfoWindowOpen(i)">
+      <div class="title notranslate">{{ m.staffName }}</div>
+      <div class="phone notranslate">{{m.mobileNumber}}</div>            
+      <div class="email notranslate">{{m.email}}</div>      
+      <a routerLink="/deliveryView/{{ m.id }}" class="btn btn-primary m-t-15 waves-effect pull-right">view</a>  
+    </agm-info-window>
+
+  </agm-marker>
+
+</agm-map>
+
+</div>
+</section>

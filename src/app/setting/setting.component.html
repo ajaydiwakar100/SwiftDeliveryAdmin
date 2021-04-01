@@ -1,0 +1,185 @@
+<section class="content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <h2></h2>
+      </div>
+
+      <!-- Input -->
+      <div class="row clearfix">
+
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header-icon">
+                      <i class="material-icons notranslate icon-color">attach_money</i>
+                  </div>
+                  <div class="header">
+                    <h2>
+                      Charges
+                      <div class="pull-right">
+                          <a routerLink="/charges" class="btn btn-primary m-t-1 waves-effect">View</a>
+                      </div>
+                    </h2>
+                  </div>
+  
+                  <div class="body">
+  
+                    <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+  
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="card">
+                <div class="header-icon">
+                    <i class="material-icons icon-color">chrome_reader_mode</i>
+                </div>
+                <div class="header">
+                  <h2>
+                    Tax
+                    <div class="pull-right">
+                        <a routerLink="/tax" class="btn btn-primary m-t-1 waves-effect">View</a>
+                    </div>
+                  </h2>
+                </div>
+  
+                <div class="body">
+  
+                  <!-- //<label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+  
+                </div>
+            </div>
+        </div> 
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="card">
+                <div class="header-icon">
+                    <i class="material-icons notranslate icon-color">motorcycle</i>
+                </div>
+                <div class="header">
+                  <h2>
+                    Distance Threshold
+                    <div class="pull-right">
+                        <a routerLink="/freekm" class="btn btn-primary m-t-1 waves-effect">View</a>
+                    </div>
+                  </h2>
+                </div>
+  
+                <div class="body">
+  
+                  <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+  
+                </div>
+            </div>
+        </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header-icon">
+                      <i class="material-icons notranslate icon-color">assignment_ind</i>
+                  </div>
+                  <div class="header">
+                    <h2>
+                      Manual Order Confirmation
+                      <div class="pull-right">
+                          <a routerLink="/manualAssign" class="btn btn-primary m-t-1 waves-effect">View</a>
+                      </div>
+                    </h2>
+                  </div>
+        
+                  <div class="body">
+        
+                    <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+        
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card" style="height:450px;">
+                  <div class="header">
+                      <h2> Settings </h2>
+                  </div>
+
+                  <div class="setting">
+
+                    <form [formGroup]="settingForm">
+
+                      <label for="outletRadius">Outlet Radius(In Miles)</label>
+                      <div class="form-group">
+                          <div class="col-sm-6">
+                              <p *ngIf="outletRadiusSelected === false">{{ outletRadius }}</p>
+                              <div *ngIf="outletRadiusSelected === true" class="form-line">
+                              <input  type="text"  id="outletRadius" class="form-control" formControlName="outletRadius" placeholder="Enter Outlet Radius">
+                                </div>
+                            </div>
+                          <div class="col-sm-6" *ngIf="other == false"><a *ngIf="outletRadiusSelected === false" class="pointer"><i (click) = "editOutletRadius()" class="material-icons notranslate" style="color: orange">edit</i></a>
+                            <a *ngIf="outletRadiusSelected === true"  class="pointer"><i (click) = "saveOutletRadius()" class="material-icons notranslate" style="color: rgb(75, 204, 43)">done</i></a></div>
+
+                        </div>
+                        &nbsp;<br/>
+                        <label for="resendOtpTimeout">Resend Otp Timeout</label>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <p *ngIf="timeoutSelected === false">{{ timeout }}</p>
+                                <div *ngIf="timeoutSelected === true" class="form-line">
+                                <input  type="text"  id="resendOtpTimeout" class="form-control" formControlName="resendOtpTime" placeholder="Enter Resend Otp Timeout">
+                                  </div>
+                              </div>
+                            <div class="col-sm-6" *ngIf="other == false"><a *ngIf="timeoutSelected === false" class="pointer"><i (click) = "editResendOtpTimeout()" class="material-icons notranslate" style="color: orange">edit</i></a>
+                              <a *ngIf="timeoutSelected === true"  class="pointer"><i (click) = "saveResendOtpTimeout()" class="material-icons notranslate" style="color: rgb(75, 204, 43)">done</i></a></div>
+
+                          </div>
+                        &nbsp;<br/>
+                        <label for="showRatingPopupAfter">Show Rating Popup Time(In min)</label>
+                        <div class="form-group">
+                            <div class="col-sm-6 notranslate">
+                                <p *ngIf="showRatingPopupAfterSelected === false">{{ showRatingPopupAfter }}</p>
+                                <div *ngIf="showRatingPopupAfterSelected === true" class="form-line">
+                                <input  type="text"  id="showRatingPopupAfter" class="form-control" formControlName="showRatingPopupAfter" placeholder="Enter Rating Popup Time">
+                                  </div>
+                              </div>
+                            <div class="col-sm-6 notranslate" *ngIf="other == false"><a *ngIf="showRatingPopupAfterSelected === false" class="pointer"><i (click) = "editShowRatingPopup()" class="material-icons notranslate" style="color: orange" >edit</i></a>
+                              <a *ngIf="showRatingPopupAfterSelected === true"  class="pointer"><i (click) = "saveShowRatingPopup()" class="material-icons notranslate" style="color: rgb(75, 204, 43)">done</i></a></div>
+
+                          </div>
+                          &nbsp;<br/>
+                          <label for="showRatingPopupAfter">Radius(Distance Cover in Miles)</label>
+                          <div class="form-group">
+                            <div class="col-sm-6 notranslate">
+                                <p *ngIf="radiusSelected === false">{{ radius }}</p>
+                                <div *ngIf="radiusSelected === true" class="form-line">
+                                <input  type="text"  id="showRatingPopupAfter" class="form-control" formControlName="radius" placeholder="Enter Distance">
+                                  </div>
+                              </div>
+                            <div class="col-sm-6 notranslate">
+                              <a *ngIf="radiusSelected === false" class="pointer"><i (click) = "editRadius()" class="material-icons notranslate" style="color: orange" >edit</i></a>
+                              <a *ngIf="radiusSelected === true"  class="pointer"><i (click) = "saveRadius()" class="material-icons notranslate" style="color: rgb(75, 204, 43)">done</i></a>
+                            </div>
+
+                          </div>
+                          <!-- &nbsp;<br/> -->
+                          <!-- <label for="showRatingPopupAfter">Convience Fee (For Restaurant)</label>
+                          <div class="form-group">
+                            <div class="col-sm-6 notranslate">
+                                <p *ngIf="ConvienceSelected === false">{{ convience  }}</p>
+                                <div *ngIf="ConvienceSelected === true" class="form-line">
+                                <input  type="text"  id="showRatingPopupAfter" class="form-control" formControlName="convience" placeholder="Enter convience Fee">
+                                  </div>
+                              </div>
+                            <div class="col-sm-6 notranslate">
+                              <a *ngIf="ConvienceSelected === false" class="pointer"><i (click) = "editConvience()" class="material-icons notranslate" style="color: orange" >edit</i></a>
+                              <a *ngIf="ConvienceSelected === true"  class="pointer"><i (click) = "saveConvience()" class="material-icons notranslate" style="color: rgb(75, 204, 43)">done</i>
+                              </a>
+                            </div>
+
+                          </div> -->
+                          
+                    </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- #END# Input -->
+
+  </div>
+</section>

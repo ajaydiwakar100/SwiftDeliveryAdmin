@@ -1,0 +1,143 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <h2></h2>
+    </div>
+
+    <!-- Exportable Table -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Orders List
+            </h2>
+           
+          </div>
+          <div class="md-form mt-0">
+            <input class="form-control" type="text" placeholder="Search" (input)="Search($event.target.value)" aria-label="Search">
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="onGoingOrders">
+          <div class="body">
+
+            <div class="table-responsive user-table" >
+               
+              <table id="datatables" class="table table-striped table-no-bordered table-hover notranslate">
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>#Ref ID</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th>Ordered On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="text-align:center;" *ngIf="orderList?.length === 0">No Orders Found!.</tr>
+                <tr *ngFor="let order of orderList; let i = index" current-page="currentPage">
+                  <th scope="row">{{ 10 *( page-1 ) + i + 1 }}</th>
+                  <td>{{ order.orderReferenceId }}</td>
+                  <td>{{ order.mobileNumber }}</td>
+                  <th scope="row">{{ order.orderStatus | titlecase }}</th>
+                  <td>{{ order.orderPlaceTime | date: 'dd-MMM-yy h:mm a' }}</td>
+                  <td>
+                    <button *ngIf ="order.orderStatus != 'rejected' " (click) = "confirmStatus(order.orderId)" [disabled]="order.confirmedTime != null" [ngClass]="{'dark' : order.confirmedTime != null}" class="btn btn-fill btn-success mat-raised-button waves-effect">Confirm</button>
+                    <button *ngIf ="order.orderStatus == 'rejected'" [disabled]="order.confirmedTime == null" class="btn btn-fill btn-danger mat-raised-button waves-effect">Reject</button>
+                    &nbsp;
+                    <a routerLink="/orderView/{{ order.orderId }}" class="btn btn-fill btn-primary mat-raised-button waves-effect">View</a>
+                    <button *ngIf ="order.orderStatus == 'unassigned' && order.type != 'takeaway' && order.confirmedTime !=null " (click) = "listDeliveryBoys(order.orderId)" class="btn btn-fill btn-success mat-raised-button waves-effect" type="button" class="btn btn-primary assign" data-toggle="modal" data-target="#myModal">
+                      assign
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <ngb-pagination *ngIf="status == 1" [collectionSize]="pages" (pageChange)="getOrder($event)" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+            <ngb-pagination *ngIf="status == 2" [collectionSize]="search_pages" (pageChange)="searchOrder($event)" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          </div> 
+          </div>
+          </div>
+          <!-- tab closed -->
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- #END# Exportable Table -->
+  <!--modal-->
+  <div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="float:left">Confirm Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group row" *ngIf="approvingOrder === true">
+              <label for="recipient-name" class="col-form-label col-sm-12">Preparation Time:</label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" id="preparation_time" name="preparation_time" placeholder="In Minutes" step="5" min="0" [(ngModel)]="preparation_time" [disabled]="approvingOrder === false" style="border: 1px solid #ccc;padding-left: 6px;">
+              </div>
+              <div *ngIf="invalidPreparationTime === true" >
+                <label class="error">Please enter valid preparation time</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="confirm_message" name="confirm_message" [(ngModel)]="confirm_message" style="resize: none;border:1px solid #ccc"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateOrderStatus()" [disabled]="orderStatusFormSubmitted===true">Confirm Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="openConfirmOrderModal" data-toggle="modal" data-target="#confirmOrderModal" type="hidden"></button>
+  <!--modal-->
+</section>
+
+<div class="container">
+  <!-- <h2>Modal Example</h2> -->
+  <!-- Button to Open the Modal -->
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+  </button> -->
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"> NearBY Delivery Boy List</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <ol>
+                <li *ngFor="let list of deliveryBoysList; let i = index" >{{list.name}}
+                    <button (click) = "deliveryBoyDetails(list)"  class="btn btn-fill btn-success mat-raised-button waves-effect">Confirm</button>
+                </li>
+              </ol>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>

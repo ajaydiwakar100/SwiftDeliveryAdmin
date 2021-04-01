@@ -1,0 +1,54 @@
+<section class="content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <h2> Payment Gateway
+          </h2>
+      </div>
+<div class="col-sm-12"></div><br/>
+      <!-- Card -->
+      <div class="row clearfix">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header">
+                    <h2>
+                      Cash On Delivery
+                      <div class="pull-right" *ngIf="enab">
+                          <label class="switch">
+                              <input type="checkbox" [checked]="codSelected === true" (change) = "radioSelected($event.target.checked, 'PaymentGateway', 'CashOnDelivery')" name="active" [disabled]="other" >
+                              <span class="slider round"></span>
+                            </label>
+                      </div>
+                    </h2>
+                  </div>
+                  <div class="body">
+                    <button class="btn btn-primary waves-effect" [disabled]="make1" (click)="default('PaymentGateway', 'CashOnDelivery')" [disabled]="other">Make Default</button>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header">
+                    <h2>
+                      Stripe
+                      <div class="pull-right" *ngIf="enabl">
+                          <label class="switch">
+                              <input type="checkbox" [checked]="stripeSelected === true" (change) = "radioSelected($event.target.checked, 'PaymentGateway', 'Card')" name="active" [disabled]="other" >
+                              <span class="slider round"></span>
+                            </label>
+                      </div>
+                    </h2>
+                  </div>
+                  <div class="body" style="display: flex;">
+                    <div *ngIf="stripe" class="">
+                      <!-- <a routerLink="/stripe" class="btn btn-warning waves-effect">Edit</a> -->
+                      <a disabled  class="btn btn-warning waves-effect">Edit</a>
+                      
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary waves-effect" [disabled]="make" (click)="default('PaymentGateway', 'Card')" [disabled]="other" >Make Default</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- #END# Card -->
+  </div>
+</section>

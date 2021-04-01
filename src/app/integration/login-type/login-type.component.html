@@ -1,0 +1,57 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2> Login Type
+            </h2>
+        </div>
+
+<div class="col-sm-12"></div><br/>
+        <!-- Card -->
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="card">
+                    <div class="header">
+                      <h2>
+                          Mobile Number and Password
+
+                        <div class="pull-right">
+                            <label class="switch">
+                                <input type="radio" [checked]="passwordSelected === true" (change) = "radioSelected($event.target.checked, 'LoginType', 'passwordLogin')" name="active">
+                                <span class="slider round"></span>
+                              </label>
+                        </div>
+                      </h2>
+                    </div>
+
+                    <div class="body">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="card">
+                    <div class="header">
+                      <h2>
+                        Mobile Number and OTP
+
+                        <div class="pull-right">
+                            <label class="switch">
+                                <input type="radio" [checked]="otpSelected === true" (change) = "radioSelected($event.target.checked, 'LoginType', 'otpLogin')" name="active">
+                                <span class="slider round"></span>
+                              </label>
+                        </div>
+                      </h2>
+                    </div>
+
+                    <div class="body">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- #END# Card -->
+    </div>
+  </section>

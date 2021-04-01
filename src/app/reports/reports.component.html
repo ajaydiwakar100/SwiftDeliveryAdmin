@@ -1,0 +1,177 @@
+
+
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="form-group">
+            
+              <label for="restaurantType">From</label>
+              <div class="form-line notranslate">
+              <ejs-datepicker  format='dd/MM/yyyy' placeholder='Select From date'
+                [(ngModel)]="fromdatedata" [min]='minDate' [max]='maxDate'></ejs-datepicker>
+
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="form-group">
+            <label for="restaurantType">To</label>
+              <div class="form-line notranslate">
+              <ejs-datepicker  format='dd/MM/yyyy' placeholder='Select To date' [(ngModel)]="todatedata"
+                [min]='tominDate' [max]='tomaxDate'></ejs-datepicker>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="form-group">
+              <label for="restaurantType">Provider</label>
+              <div class="form-line notranslate">
+                <ng-multiselect-dropdown [(ngModel)]="providerdata" [data]="serviceList1" [settings]="serviceSettings"
+                  (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+          </div>
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="form-group">
+            <label for="restaurantType">Order Status</label>
+              <div class="form-line notranslate">
+                <ng-multiselect-dropdown [(ngModel)]="orderdata" [data]="orderlis" [settings]="serviceSettings"
+                  (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="form-group">
+            <label for="restaurantType">Restaurant</label>
+              <div class="form-line notranslate">
+              <ng-multiselect-dropdown [(ngModel)]="restaurantdata" [data]="serviceList2" [settings]="serviceSettings"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+      >
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="form-group">
+          <label for="restaurantType">Outlet</label>
+            <div class="form-line notranslate">
+              <ng-multiselect-dropdown [(ngModel)]="outletdata" [data]="serviceList" [settings]="serviceSettings"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+
+            </div>
+          </div>
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-4 col-xs-4">
+          <button (click)="reset()" class="btn btn-fill btn-warning mat-raised-button center"
+          style="float:right;    margin-right: -80px;">Reset</button>
+          <button (click)="filter(page)" class="btn btn-fill btn-success mat-raised-button center"
+            style="float:right;    margin-right: -140px;">Filter</button>
+        </div>
+      </div>
+    </div>
+    <!-- Exportable Table -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <div class="pull-right">
+              <a (click)="exportAsXLSX()" class="btn btn-fill btn-success mat-raised-button">Export</a>
+            </div>
+            <h2>
+              Reports List
+            </h2>
+
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="onGoingOrders">
+              <div class="body">
+
+                <div class="table-responsive">
+
+                  <table id="datatables" class="table table-striped table-no-bordered table-hover notranslate">
+                    <thead>
+                      <tr>
+
+                        <th>S.No</th>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th nowrap>Paid online</th> 
+                        <th nowrap>Paid cash</th>
+                        <th>Subtotal</th>
+                        <!-- <th>Ordertotal</th> -->
+                        <th nowrap>Sale tax </th> 
+                        <th>Commission</th>
+                        <th>Convenience</th>
+                        <th>Promo</th>
+                        <th nowrap>Driver Tip</th>
+                        <th nowrap>Delivery Fee</th>
+                        <th>Mileage</th>
+                        <th>Earnings</th>
+                        <th>Action</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="text-align:center;" *ngIf="result?.length === 0">No Orders Found!.</tr>
+                      <tr *ngFor="let order of result; let i = index" current-page="currentPage">
+                        <td scope="row">{{ 10 *( page-1 ) + i + 1 }}</td>
+                        <td>{{ order.id }}</td>
+                        <!-- <td nowrap>{{ order.orderReferenceId }}</td>      -->
+                        <td nowrap>{{ order.orderPlaceTime | date: 'dd-MMM-yy h:mm a' }}</td>
+                        <td nowrap>{{ order.username }}</td>
+                        <ng-template [ngIf]="order.PaymentTypeId == 10" [ngIfElse]="elseBlock">
+                            <td>Yes</td>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                          <td>No</td>
+                        </ng-template>  
+                        <ng-template [ngIf]="order.PaymentTypeId ==11" [ngIfElse]="elseBlock2">
+                          <td>Yes</td>
+                        </ng-template>
+                        <ng-template #elseBlock2>
+                          <td>No</td>
+                        </ng-template>  
+                    
+                       
+                        <td nowrap>$ {{ order.netAmount }}.00</td>
+                        <!-- <td>1234</td> -->
+                        <td nowrap>${{order.tax}}.00</td>
+                        <td nowrap>${{order.adminServiceCharge}}</td>
+                        <td nowrap>${{order.convenienceFee}}.00</td>
+                        <td>{{order.couponName}}</td>
+                        <td>${{order.tip}}</td>
+                        <td nowrap>${{order.deliverycharge}}.00</td>
+                        <td>1234</td>
+                        <td nowrap>$ {{order.providerEarnings}}</td>
+                        <td>
+                          <a routerLink="/orderView/{{ order.id }}"
+                            class="btn btn-fill btn-primary mat-raised-button waves-effect">View</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ngb-pagination [collectionSize]="pages" (pageChange)="filter1($event)" [(page)]="page" [maxSize]="5"
+                  [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+              </div>
+            </div>
+          </div>
+          <!-- tab closed -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #END# Exportable Table -->
+</section>

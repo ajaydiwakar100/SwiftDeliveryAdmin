@@ -1,0 +1,251 @@
+<section class="content">
+
+  <div class="container-fluid">
+      <div class="block-header">
+          <h2> Integrations </h2>
+      </div>
+
+      <div *ngIf="" class="alert alert-danger">
+
+          <strong>Error!</strong>
+        </div>
+        <div class="col-sm-12"></div><br/>
+
+      <!-- Card -->
+      <div class="row clearfix">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header-icon">
+                      <i class="material-icons notranslate icon-color">sms</i>
+                  </div>
+                  <div class="header">
+                    <h2>
+                      SMS
+                      <div class="pull-right">
+                          <a routerLink="/smsGateway" class="btn btn-primary m-t-1 waves-effect">View</a>
+                      </div>
+                    </h2>
+                  </div>
+
+                  <div class="body">
+
+                      <label>Selected Gateway </label><p>{{ selectedSmsGateway }}</p>
+
+                  </div>
+              </div>
+          </div>
+
+          <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header-icon">
+                      <i class="material-icons icon-color">mail_outline</i>
+                  </div>
+                  <div class="header">
+                    <h2>
+                      Mail
+                      <div class="pull-right">
+                          <a routerLink="/smtpMail" class="btn btn-primary m-t-1 waves-effect">View</a>
+                      </div>
+                    </h2>
+                  </div>
+
+                  <div class="body">
+                  </div>
+              </div>
+          </div> -->
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="card">
+                <div class="header-icon">
+                    <i class="material-icons notranslate icon-color">location_on</i>
+                </div>
+                <div class="header">
+                  <h2>
+                    Map API Key
+                    <div class="pull-right">
+                        <a routerLink="/map" class="btn btn-primary m-t-1 waves-effect">View</a>
+                    </div>
+                  </h2>
+                </div>
+
+                <div class="body">
+
+                  <!-- <label>Selected Gateway </label><p>Twilio</p> -->
+
+                </div>
+            </div>
+        </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header-icon">
+                      <i class="material-icons notranslate icon-color">notifications_active</i>
+                  </div>
+                  <div class="header">
+                    <h2>
+                      Push Notification
+                      <div class="pull-right">
+                          <a routerLink="/push" class="btn btn-primary m-t-1 waves-effect">View</a>
+                      </div>
+                    </h2>
+                  </div>
+
+                  <div class="body">
+
+                    <label>Selected Gateway </label><p>{{ pushNotification }}</p>
+
+                  </div>
+              </div>
+          </div>
+
+          <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="card">
+                <div class="header-icon">
+                    <i class="material-icons icon-color">attach_money</i>
+                </div>
+                <div class="header">
+                  <h2>
+                    Charges
+                    <div class="pull-right">
+                        <a routerLink="/charges" class="btn btn-primary m-t-1 waves-effect">View</a>
+                    </div>
+                  </h2>
+                </div>
+
+                <div class="body"> -->
+
+                  <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+
+                <!-- </div>
+            </div>
+        </div> -->
+<!-- 
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="card">
+              <div class="header-icon">
+                  <i class="material-icons icon-color">motorcycle</i>
+              </div>
+              <div class="header">
+                <h2>
+                  Distance Threshold
+                  <div class="pull-right">
+                      <a routerLink="/freekm" class="btn btn-primary m-t-1 waves-effect">View</a>
+                  </div>
+                </h2>
+              </div>
+
+              <div class="body"> -->
+
+                <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+
+              <!-- </div>
+          </div>
+      </div> -->
+
+         <!-- #END# Card -->
+
+    <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="card">
+          <div class="header-icon">
+              <i class="material-icons icon-color">assignment_ind</i>
+          </div>
+          <div class="header">
+            <h2>
+              manual assign
+              <div class="pull-right">
+                  <a routerLink="/manualAssign" class="btn btn-primary m-t-1 waves-effect">View</a>
+              </div>
+            </h2>
+          </div>
+
+          <div class="body"> -->
+
+            <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+
+          <!-- </div>
+      </div>
+  </div> -->
+
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="card">
+          <div class="header-icon">
+              <i class="material-icons notranslate icon-color">payment</i>
+          </div>
+          <div class="header">
+            <h2>
+              payment method
+              <div class="pull-right">
+                  <a routerLink="/paymentGateway" class="btn btn-primary m-t-1 waves-effect">View</a>
+              </div>
+            </h2>
+          </div>
+
+          <div class="body">
+
+            <!-- <label>Selected Gateway </label><p>{{ pushNotification }}</p> -->
+
+          </div>
+      </div>
+  </div>
+      </div>
+      <!-- #END# Card -->
+
+      <!-- Card -->
+      <div class="row clearfix">
+        
+
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="card">
+                <div class="header-icon">
+                    <i class="material-icons icon-color">payment</i>
+                </div>
+                <div class="header">
+                  <h2>
+                    Payment Gateway
+                    <div class="pull-right">
+                        <a routerLink="/paymentGateway" class="btn btn-primary m-t-1 waves-effect">View</a>
+                    </div>
+                  </h2>
+                </div>
+
+                <div class="body">
+
+                    <label>Selected Gateway </label><br/>
+                    <span *ngFor="let name of paymentGateWay">
+                      {{ name }},
+                    </span>
+
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="card">
+              <div class="header-icon">
+                  <i class="material-icons icon-color">lock_outline</i>
+              </div>
+              <div class="header">
+                <h2>
+                  Login Type
+                  <div class="pull-right">
+                      <a routerLink="/loginType" class="btn btn-primary m-t-1 waves-effect">View</a>
+                  </div>
+                </h2>
+              </div>
+
+              <div class="body">
+
+                  <label>Selected Type </label><p>{{ loginType }}</p>
+
+              </div>
+          </div>
+      </div> -->
+
+
+
+    </div>
+ 
+
+
+  </div>
+</section>

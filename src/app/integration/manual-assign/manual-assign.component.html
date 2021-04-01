@@ -1,0 +1,36 @@
+<section class="content">
+
+  <div class="container-fluid">
+      <div class="block-header">
+          <h2> Order Auto-confirmation / Manual confirmation
+          </h2>
+      </div>
+
+<div class="col-sm-12"></div><br/>
+      <!-- Card -->
+      <div class="row clearfix">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="card">
+                  <div class="header">
+                    <h2>
+                      Manual Order Confirmation
+                      <div class="pull-right">
+                          <label class="switch">
+                              <input type="checkbox" [checked]="manualAssignSelected === true" (change) = "radioSelected($event.target.checked, 'ManualAssign', 'ManualAssign')" name="active" disabled>
+                              <span class="slider round"></span>
+                            </label>
+                      </div>
+                    </h2>
+                  </div>
+
+                  <div class="body">
+                    <div *ngIf="manualAssignSelected" class="">
+                      <!-- <a routerLink="/manualAssign" class="btn btn-warning waves-effect">Edit</a> -->
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- #END# Card -->
+  </div>
+</section>

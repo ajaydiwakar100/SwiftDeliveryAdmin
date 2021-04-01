@@ -1,0 +1,58 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+
+          <strong>Error!</strong> {{ errorMessage }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Card -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                      <h2>
+                        Stripe
+                        <div class="pull-right">
+                          <div class="pull-right">
+                            <button type="submit" form="stripeForm" class="btn btn-success m-t-1 waves-effect" [disabled]="other" >Save</button>
+                            &nbsp;
+                            <a routerLink="/paymentGateway" class="btn btn-danger m-t-1 waves-effect">Cancel</a>
+                        </div>
+                        </div>
+                      </h2>
+                    </div>
+
+                    <div class="body">
+
+                      <form [formGroup]="stripeForm" (ngSubmit)="onSubmit()" id="stripeForm">
+                        <label for="secret_key">Secret Key</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" formControlName="secretKey" id="secret_key" class="form-control" placeholder="Enter Secret Key" [disabled]="other" >
+                            </div>
+                        </div>
+
+                        <label for="publishable_key">Publishable Key</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" id="publishable_key" class="form-control" formControlName="publishableKey" placeholder="Enter Publishable Key" [disabled]="other" >
+                            </div>
+                        </div>
+
+                      </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Card -->
+    </div>
+  </section>

@@ -1,0 +1,107 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <a routerLink="/outletList" class="btn m-t-15 bg-pink waves-effect pull-right">Back</a>
+      </div>
+    </div>
+    &nbsp;
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-3">
+        <div class="card profile-card">
+          <div class="profile-header">&nbsp;</div>
+          <div class="profile-body">
+            <div class="image-area">
+              <img src="{{ image || 'assets/images/user.png' }}" style="width:128px;height:128px;"
+                alt="AdminBSB - Profile Image" />
+            </div>
+            <div class="content-area notranslate">
+              <h3>{{ userName }}</h3>
+              <p>
+                  <ngb-rating [rate]="averageRating" [max]=5 [readonly]=true>
+                      <ng-template let-fill="fill">
+                        <span class="star" [ngClass]="'color'+averageRating"[class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+              </p>
+              <p><a href="mailto:{{ email }}">{{ email }}</a></p>
+              <p>{{ phoneNumber }}</p>
+              <p *ngIf="status === 1; else inactive">Active</p>
+              <ng-template #inactive>
+                <p>Active</p>
+              </ng-template>
+              <p><strong>Total Earnings</strong> &nbsp; :  {{totalAmount}} </p>
+              <p style="color: #333"><strong>Balance</strong> &nbsp; :  {{balanceAmount}} </p>
+              <a *ngIf = "isBlocked == 1; else unsus"><button class="btn btn-primary m-t-15 waves-effect" (click) = "unsuspend(isBlocked)">Enable</button></a>
+              <ng-template #unsus><button class="btn btn-danger m-t-15 waves-effect" (click) = "suspend(isBlocked)">Disable</button></ng-template>
+            </div>
+          </div>
+          <div class="profile-footer">
+            <ul>
+              <li>
+                <h4>Address</h4>
+                <address class="notranslate">
+                  <a>{{ userName }}</a>.<br>
+                  {{ addressLineOne + ' ' + addressLineTwo }}<br>
+                  {{ street + ', ' + area }}<br>
+                  {{ city + ', ' + state }}<br>
+                  {{ country + ' - ' + zipcode }}
+                </address>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-xs-12 col-sm-9">
+        <div class="card">
+          <div class="header"><h2>Orders</h2></div>
+          <div class="body">
+
+
+            <div class="table-responsive">
+              <table id="datatables" class="table table-striped table-no-bordered table-hover notranslate">
+                <thead>
+                  <tr>
+                    <!-- <th>S.No</th> -->
+                    <th>Ref Id</th>
+                    <th>User E-Mail</th>
+                    <th>Mobile</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <!-- <th>Action</th> -->
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let order of orders; let i = index">
+                    <!-- <th scope="row">{{ i }}</th> -->
+                    <th scope="row">{{ order.orderReferenceId }}</th>
+                    <td>{{ order.email }}</td>
+                    <td>{{ order.mobileNumber }}</td>
+                    <td>{{ order.orderPlaceTime | date: 'dd-MMM-yy' }}</td>
+                    <td>{{ order.netAmount }}</td>
+                    <td>{{ order.orderStatus | titlecase }}</td>
+                    <!-- <td>
+                      <a routerLink="/orderView/{{ order.orderId }}"
+                        class="btn btn-primary m-t-15 waves-effect">View</a>
+                    </td> -->
+                  </tr>
+
+                  <tr style="text-align:center;" *ngIf="orders?.length === 0">
+                    No Orders Found
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
